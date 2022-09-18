@@ -42,3 +42,103 @@ Its ability to process large amounts of data and CPU-intensive operations makes 
 - [Rust Guide by Gints Dreimanis](https://serokell.io/blog/rust-guide)  
 
 ---  
+
+## What is Cargo ?
+
+Cargo is a build system and package manager for Rust.  
+It helps developers download and manage dependencies and assists in creating Rust packages.  
+Packages in Rust are often called "crates" in the Rust community.
+
+A program often depends on external libraries or dependencies to run, which enables us to write applications that perform tasks that   
+we don't know how to code or we don't want to spend time coding.  
+All our dependencies will be listed in this file.  
+At this point, we do not have any dependencies for our new program.  
+
+Open the Cargo.toml file and view its contents:
+
+``` toml
+[package]
+name = "hello_world"
+version = "0.1.0"
+authors = ["user <user@mail.com>"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[dependencies]
+```
+
+### Read the following blogs/articles to know about the Cargo package manager  
+
+- [Getting started with the Rust package manager, Cargo](https://opensource.com/article/20/3/rust-cargo)
+- [Learning Cargo](https://binx.io/2018/11/27/learning-cargo/)
+
+---  
+
+## CLI for interacting with Rust and Cargo  
+
+``` rust
+$ rustc --version  
+describes the currently installed version of rust
+```
+
+``` rust
+$ rustup update
+updates the currently installed version of rust
+```
+
+``` rust
+$ rustup self uninstall  
+uninstalls the currently installed version of rust
+```
+
+``` rust
+$ rustup doc  
+open the local copy of the documentation in the browser
+```
+
+``` rust
+$ rustc main.rs  
+compiles the main.rs file
+```
+
+``` rust
+$ cargo --version
+describes the currently installed version of cargo
+```
+
+``` rust
+$ cargo new hello_cargo
+creates a binary for rust project (follows a template)
+```
+
+``` rust
+$ cargo new --lib hello_cargo
+creates a library for rust project (follows a template)
+```
+
+``` rust
+$ cargo run  
+compiles the code and then runs the resulting executable all in one command
+```
+
+``` rust
+$ cargo check  
+quickly checks the code to make sure it compiles but does not produce an executable
+```
+
+``` rust
+$ cargo build (--release)
+builds the executable file out of the project source code
+```
+
+``` rust
+$ cargo clean
+removes all intermediate files created by the earlier build process
+```
+
+``` rust
+$ cargo test
+executes the the unit-tests and integration-tests 
+```
+
+---  
