@@ -264,3 +264,111 @@ In many low-level languages, this kind of check is not done, and when we provide
 Rust protects us against this kind of error by immediately exiting instead of allowing the memory access and continuing.  
 
 ---
+
+## Functions
+
+Functions are prevalent in Rust code.  
+Rust code uses snake case as the conventional style for function and variable names, in which all letters are lowercase and underscores separate words.  
+
+```rust
+    fn main() {
+        println!("Hello, world!");
+
+        another_function();
+    }
+
+    fn another_function() {
+        println!("Another function.");
+    }
+```
+
+We can define functions to have parameters, which are special variables that are part of a function's signature.  
+When a function has parameters, we can provide it with concrete values for those parameters.  
+Technically, the concrete values are called arguments, and arguments are the variables in a function's definition or the concrete values passed in when we call a function.  
+
+```rust
+    fn main() {
+        print_labeled_measurement(5, 'h');
+    }
+
+    fn print_labeled_measurement(value: i32, unit_label: char) {
+        println!("The measurement is: {value}{unit_label}");
+    }
+```
+
+In function signatures, we must declare the type of each parameter.  
+This is a deliberate decision in Rust's design: requiring type annotations in function definitions means the compiler almost never needs us to use them elsewhere in the code to figure out what type we mean.  
+The compiler is also able to give more helpful error messages if it knows what types the function expects.
+
+### Statements and Expressions
+
+Since Rust is an expression-based language, this is an important distinction to understand. Other languages don’t have the same distinctions.  
+Statements are instructions that perform some action and do not return a value.  
+Expressions evaluate to a resulting value.  
+
+```rust
+    fn main() {
+        // its a statement
+        let a = 6;
+
+        // its an error
+        let x = (let y = 6);
+
+        // its an expression
+        let y = {
+            let x = 3;
+            x + 1
+        };
+
+        println!("The value of y is: {y}");
+    }
+```
+
+### Functions with Return Values
+
+Functions can return values to the code that calls them.  
+We don't name return values, but we must declare their type after an arrow (->).  
+In Rust, the return value of the function is synonymous with the value of the final expression in the block of the body of a function.  
+We can return early from a function by using the return keyword and specifying a value, but most functions return the last expression implicitly.
+
+```rust
+    fn five() -> i32 {
+        5
+    }
+
+    fn main() {
+        let x = five();
+
+        println!("The value of x is: {x}");
+    }
+```
+
+Lets look at another example:  
+
+```rust
+    fn main() {
+        let x = plus_one(5);
+
+        println!("The value of x is: {x}");
+    }
+
+    fn plus_one(x: i32) -> i32 {
+        x + 1
+    }
+```
+
+But if we change the expression `x + 1` into a statement, then, see what happens:
+
+```rust
+    fn main() {
+        let x = plus_one(5);
+
+        println!("The value of x is: {x}");
+    }
+
+    fn plus_one(x: i32) -> i32 {
+        x + 1;
+    }
+```
+
+---
