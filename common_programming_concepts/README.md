@@ -372,3 +372,195 @@ But if we change the expression `x + 1` into a statement, then, see what happens
 ```
 
 ---
+
+## Control Flow
+
+The ability to run some code depending on if a condition is true, or run some code repeatedly while a condition is true, are basic building blocks in most programming languages.  
+
+### if Expressions
+
+It’s also worth noting that the condition in this code must be a bool. If the condition isn’t a bool, we’ll get an error.
+
+```rust
+    fn main() {
+        let number = 3;
+
+        if number < 5 {
+            println!("condition was true");
+        } else {
+            println!("condition was false");
+        }
+    }
+```
+
+### Handling Multiple Conditions with else if
+
+```rust
+    fn main() {
+        let number = 6;
+
+        if number % 4 == 0 {
+            println!("number is divisible by 4");
+        } else if number % 3 == 0 {
+            println!("number is divisible by 3");
+        } else if number % 2 == 0 {
+            println!("number is divisible by 2");
+        } else {
+            println!("number is not divisible by 4, 3, or 2");
+        }
+    }
+```
+
+Using too many `else if` expressions can clutter the code, so if we have more than one, we might want to refactor our code.  
+Rust provides a powerful branching construct called `match` for these cases.
+
+### Using if in a let Statement
+
+Since `if` is an expression, we can use it on the right side of a `let` statement to assign the outcome to a variable.
+
+```rust
+    fn main() {
+        let condition = true;
+        let number = if condition { 5 } else { 6 };
+        println!("The value of number is: {number}");
+    }
+```
+
+Remember that blocks of code evaluate to the last expression in them, and numbers by themselves are also expressions.
+
+```rust
+    fn main() {
+        let condition = true;
+        let number = if condition { 5 } else { "six" };
+        println!("The value of number is: {number}");
+    }
+
+    |
+    |     let number = if condition { 5 } else { "six" };
+    |                                 -          ^^^^^ expected integer, found `&str`
+    |                                 |
+    |                                 expected because of this
+```
+
+### Repeating Code with loop
+
+The `loop` keyword tells Rust to execute a block of code over and over again forever or until we explicitly tell it to stop.  
+Fortunately, Rust also provides a way to break out of a loop using code.  
+We can place the `break` keyword within the loop to tell the program when to stop executing the loop.
+
+```rust
+    fn main() {
+        let mut counter = 0;
+
+        let result = loop {
+            counter += 1;
+
+            if counter == 10 {
+                break counter * 2;
+            }
+        };
+
+        println!("The result is {result}");
+    }
+```
+
+### Loop Labels to Disambiguate Between Multiple Loops
+
+If we have loops within loops, `break` and `continue` apply to the innermost loop at that point.  
+We can optionally specify a loop label on a loop that we can then use with `break` or `continue` to specify that those keywords apply to the labeled loop instead of the innermost loop.  
+Loop labels must begin with a single quote.  
+
+```rust
+    fn main() {
+        let mut count = 0;
+        'counting_up: loop {
+            println!("count = {count}");
+            let mut remaining = 10;
+            loop {
+                println!("remaining = {remaining}");
+                if remaining == 9 {
+                    break;
+                }
+                if count == 2 {
+                    break 'counting_up;
+                }
+                remaining -= 1;
+            }
+            count += 1;
+        }
+        println!("End count = {count}");
+    }
+```
+
+### Conditional Loops with while
+
+A program will often need to evaluate a condition within a loop.  
+While the condition is true, the loop runs.  
+When the condition ceases to be true, the program calls `break`, stopping the loop.  
+It's possible to implement behavior like this using a combination of `loop`, `if`, `else`, and `break`.  
+However, this pattern is so common that Rust has a built-in language construct for it, called a `while` loop.  
+
+```rust
+    fn main() {
+        let mut number = 3;
+        while number != 0 {
+            println!("{number}!");
+            number -= 1;
+        }
+        println!("LIFTOFF!!!");
+    }
+```
+
+### Looping Through a Collection with for
+
+We can choose to use the while construct to loop over the elements of a collection, such as an array.  
+
+```rust
+    fn main() {
+        let a = [10, 20, 30, 40, 50];
+        let mut index = 0;
+        while index < 5 {
+            println!("the value is: {}", a[index]);
+            index += 1;
+        }
+    }
+    
+    the value is: 10
+    the value is: 20
+    the value is: 30
+    the value is: 40
+    the value is: 50
+```
+
+As a more concise alternative, we can use a for loop and execute some code for each item in a collection.  
+
+```rust
+    fn main() {
+        let a = [10, 20, 30, 40, 50];
+        for element in a {
+            println!("the value is: {element}");
+        }
+    }
+
+    the value is: 10
+    the value is: 20
+    the value is: 30
+    the value is: 40
+    the value is: 50
+```
+
+```rust
+    fn main() {
+        for number in (1..4).rev() {
+            println!("{number}!");
+        }
+        println!("LIFTOFF!!!");
+    }
+
+    3!
+    2!
+    1!
+    LIFTOFF!!!
+```
+
+---
