@@ -388,14 +388,14 @@ That means this reference would be pointing to an invalid String. That's no good
 The solution here is to return the String directly:
 
 ```rust
-fn main() {
-    let string = no_dangle();
-}
+    fn main() {
+        let string = no_dangle();
+    }
 
-fn no_dangle() -> String {
-    let s = String::from("hello");
-    s
-}
+    fn no_dangle() -> String {
+        let s = String::from("hello");
+        s
+    }
 ```
 
 This works without any problems. Ownership is moved out, and nothing is deallocated.
@@ -410,5 +410,76 @@ This works without any problems. Ownership is moved out, and nothing is dealloca
 ---
 
 ## The Slice Type
+
+Slices let us reference a contiguous sequence of elements in a collection rather than the whole collection.  
+A slice is a kind of reference, so it does not have ownership.  
+
+The `first_word` function has a `&String` as a parameter. We don't want ownership, so this is fine. But what should we return ?  
+We don't really have a way to talk about part of a string.  
+However, we could return the index of the end of the word, indicated by a space.
+
+```rust
+fn first_word(s: &String) -> usize {
+    let bytes = s.as_bytes();
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return i;
+        }
+    }
+    s.len()
+}
+```
+
+We now have a way to find out the index of the end of the first word in the string, but there's a problem.  
+We're returning a usize on its own, but it's only a meaningful number in the context of the `&String`.  
+In other words, because it's a separate value from the String, there's no guarantee that it will still be valid in the future.  
+
+The `string slice` type is represented by `&str`.  
+
+```rust
+    let s = String::from("hello world");
+    let hello = &s[0..5];
+    let world = &s[6..11];
+```
+
+Rather than a reference to the entire String, `hello` is a reference to a portion of the String, specified in the extra [0..5] bit.  
+In the case of `let world = &s[6..11];`, `world` would be a slice that contains a pointer to the byte at index 6 of s with a length value of 5.  
+
+Now lets rewrite the `first_word` function once again using the `&str` type.  
+
+```rust
+    fn first_word(s: &String) -> &str {
+        let bytes = s.as_bytes();
+        for (i, &item) in bytes.iter().enumerate() {
+            if item == b' ' {
+                return &s[0..i];
+            }
+        }
+        &s[..]
+    }
+```
+
+Now when we call `first_word`, we get back a single value that is tied to the underlying data.  
+The value is made up of a reference to the starting point of the slice and the number of elements in the slice.
+
+String Literals are String Slices
+
+String Slices can be used as Parameters
+If we have a string slice, we can pass that directly.  
+If we have a String, we can pass a slice of the String or a reference to the String.  
+This flexibility takes advantage of deref coercions.  
+
+---
+
+### Other Slice Types  
+
+```rust
+    let a = [1, 2, 3, 4, 5];
+    let slice = &a[1..3];
+    assert_eq!(slice, &[2, 3]);
+```
+
+This slice has the type &[i32].  
+It works the same way as string slices do, by storing a reference to the first element and a length.  
 
 ---
