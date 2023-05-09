@@ -39,8 +39,8 @@ and cleaning up unused data on the heap so we don't run out of space are all pro
 
 Ownership Rules
     - every value in Rust has an owner
-    - there can be oly one owner for a value at a time
-    - when the owner goes out of scope, the associated value value also goes out of the scope
+    - there can be only one owner for a value at a time
+    - when the owner goes out of scope, the associated value also goes out of the scope
 
 When a variable goes out of scope, Rust calls a special function for us.  
 This function is called drop, and it's where the author of String can put the code to return the memory.  
