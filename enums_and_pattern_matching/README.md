@@ -1,5 +1,5 @@
 
-# Enums and Pattern Maching
+# Enums and Pattern Matching
 
 Where structs give us a way of grouping together related fields and data, like a `Rectangle` with its `width` and `height`,  
 Enums give us a way of saying a value is one of a possible set of values.  
@@ -162,7 +162,7 @@ Now lets see how can we fetch or extract the value out of the `Option` enum or `
 
 ---
 
-## The match Control Flow Construct
+## The `match` Control Flow Construct
 
 The `match` control flow in Rust is a powerful way to handle different cases of a value.  
 It is similar to the switch statement in other languages.  
@@ -177,12 +177,12 @@ Here is an example of how the match statement can be used:
     fn main() {
         let value = 5;
         match value {
-        1 => println!("One"),
-        2 => println!("Two"),
-        3 => println!("Three"),
-        4 => println!("Four"),
-        5 => println!("Five"),
-        _ => println!("Other"),
+            1 => println!("One"),
+            2 => println!("Two"),
+            3 => println!("Three"),
+            4 => println!("Four"),
+            5 => println!("Five"),
+            _ => println!("Other"),
         }
     }
 ```
