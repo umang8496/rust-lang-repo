@@ -29,6 +29,7 @@ Its ability to process large amounts of data and CPU-intensive operations makes 
 - [Rust-Lang Stable Book](https://doc.rust-lang.org/book/)  
 - [A Gentle Introduction to Rust](https://stevedonovan.github.io/rust-gentle-intro/)  
 - [Rust API Documentation](https://doc.rust-lang.org/std/)
+- [Comprehensive Rust By Google](https://google.github.io/comprehensive-rust/welcome.html)
 - [Rust By Example](https://doc.rust-lang.org/stable/rust-by-example/)  
 - [Exercism](https://exercism.org/dashboard)  
 - [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)
@@ -40,6 +41,12 @@ Its ability to process large amounts of data and CPU-intensive operations makes 
 - [What is Rust programming language by Iryna Deremuk](https://litslink.com/blog/what-is-rust-programming-language)  
 - [What is rust and why is it so popular](https://stackoverflow.blog/2020/01/20/what-is-rust-and-why-is-it-so-popular/)  
 - [Rust Guide by Gints Dreimanis](https://serokell.io/blog/rust-guide)  
+
+
+### Rust Cheat Sheets
+
+- [Quick Ref](https://quickref.me/rust.html)
+- [github.com/donbright](https://github.com/donbright/rust-lang-cheat-sheet)
 
 ---  
 
